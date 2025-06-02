@@ -16,8 +16,8 @@ AGENT_ID = os.getenv("AGENT_ID")
 SERVER = os.getenv("SERVER")
 SERVER_URL = f"{SERVER}/ws/{AGENT_ID}"
 
-# ssl_context = ssl.create_default_context()
-ssl_context = None  # Disable SSL for local testing; use proper certs in production
+ssl_context = ssl.create_default_context()
+# ssl_context = None  # Disable SSL for local testing; use proper certs in production
 
 async def run_agent():
     async with websockets.connect(SERVER_URL, ssl=ssl_context) as websocket:
