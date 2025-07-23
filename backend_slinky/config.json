@@ -1,0 +1,12 @@
+{
+    "unique_id": "kyle_dev_test",
+    "server": "ws://127.0.0.1:8000",
+    "connections": [
+        {
+            "connection_name": "testingFacility",
+            "connection_type": "mssql",
+            "connection_gui": "mssql_dev_test",
+            "connection_string": "DRIVER={ODBC Driver 18 for SQL Server};SERVER=localhost;DATABASE=testingFacility;UID=sa;PWD=localcontrol;TrustServerCertificate=yes;Encrypt=yes;"
+        }
+    ]
+}
