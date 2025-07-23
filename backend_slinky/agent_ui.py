@@ -11,7 +11,7 @@ class SlinkyUI(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Slinky Service Manager")
-        self.setGeometry(200, 200, 600, 500)
+        self.setGeometry(50, 50, 500, 700)
 
         self.config = load_config()
         self.process = QProcess(self)
