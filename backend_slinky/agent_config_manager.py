@@ -7,8 +7,8 @@ CONFIG_FILE = "config.json"
 def load_config():
     if not os.path.exists(CONFIG_FILE):
         config = {
-            "unique_id": str(uuid.uuid4()),
-            "server": "ws://127.0.0.1:8000",
+            "client_guid": str(uuid.uuid4()),
+            "client_server": "ws://127.0.0.1:8000",
             "connections": []
         }
         save_config(config)

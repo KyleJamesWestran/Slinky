@@ -26,7 +26,7 @@ class SlinkyUI(QWidget):
         layout = QVBoxLayout()
 
         # Unique ID Display
-        self.uuid_label = QLabel(f"Unique ID: {self.config['unique_id']}")
+        self.uuid_label = QLabel(f"Unique ID: {self.config['client_guid']}")
         layout.addWidget(self.uuid_label)
 
         # Connections List
@@ -104,9 +104,9 @@ class SlinkyUI(QWidget):
         if not name or not param:
             return
 
-        # Check if connection already exists to preserve gui
+        # Check if connection already exists to preserve guid
         existing_conn = next((c for c in self.config['connections'] if c['connection_name'] == name), None)
-        gui_id = existing_conn.get("connection_gui") if existing_conn else str(uuid.uuid4())
+        connection_guid = existing_conn.get("connection_guid") if existing_conn else str(uuid.uuid4())
 
         # Remove old entry if editing
         self.config['connections'] = [c for c in self.config['connections'] if c['connection_name'] != name]
@@ -114,7 +114,7 @@ class SlinkyUI(QWidget):
         conn = {
             "connection_name": name,
             "connection_type": conn_type,
-            "connection_gui": gui_id
+            "connection_guid": connection_guid
         }
 
         if conn_type == "filemanager":
