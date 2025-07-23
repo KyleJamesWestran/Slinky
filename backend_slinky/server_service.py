@@ -29,7 +29,7 @@ async def websocket_endpoint(websocket: WebSocket, client_id: str):
 # --- Updated Section ---
 
 class CommandRequest(BaseModel):
-    gui: str             # New: GUI identifier
+    guid: str             # New: GUID identifier
     command: str         # Raw SQL or file path
 
 @app.post("/run_command/{client_id}")
@@ -42,7 +42,7 @@ async def run_command(client_id: str, request: CommandRequest):
 
     # New message format for updated agent
     message = {
-        "gui": request.gui,
+        "guid": request.guid,
         "command": request.command
     }
 

@@ -9,28 +9,28 @@ from agent_config_manager import load_config
 CONFIG_FILE = "config.json"
 
 config = load_config()
-AGENT_ID = config["unique_id"]
-SERVER = config["server"]
+AGENT_ID = config["client_guid"]
+SERVER = config["client_server"]
 SERVER_URL = f"{SERVER}/ws/{AGENT_ID}"
 ssl_context = None  # Add SSL context if needed
 
-def get_connection_info(gui):
+def get_connection_info(guid):
     for conn in config["connections"]:
-        if conn["connection_gui"] == gui:
+        if conn["connection_guid"] == guid:
             if "connection_type" not in conn:
                 return {"error": "ERROR: 'connection_type'"}
             return conn
-    return {"error": "ERROR: connection_gui not found"}
+    return {"error": "ERROR: connection_guid not found"}
 
 async def handle_command(data):
     try:
-        gui = data.get("gui")
+        guid = data.get("guid")
         command = data.get("command")
 
-        if not gui or not command:
-            return "ERROR: 'gui' or 'command' missing in request"
+        if not guid or not command:
+            return "ERROR: 'guid' or 'command' missing in request"
 
-        conn_info = get_connection_info(gui)
+        conn_info = get_connection_info(guid)
         connection_type = conn_info.get("connection_type")
 
         if connection_type == "mssql":
