@@ -98,7 +98,7 @@ class SlinkyUI(QWidget):
 
     def add_or_update_connection(self):
         name = self.name_input.text().strip()
-        conn_type = self.type_select.currentText()
+        type = self.type_select.currentText()
         param = self.param_input.text().strip()
 
         if not name or not param:
@@ -106,22 +106,22 @@ class SlinkyUI(QWidget):
 
         # Check if connection already exists to preserve guid
         existing_conn = next((c for c in self.config['connections'] if c['connection_name'] == name), None)
-        connection_guid = existing_conn.get("connection_guid") if existing_conn else str(uuid.uuid4())
+        guid = existing_conn.get("connection_guid") if existing_conn else str(uuid.uuid4())
 
         # Remove old entry if editing
         self.config['connections'] = [c for c in self.config['connections'] if c['connection_name'] != name]
 
         conn = {
             "connection_name": name,
-            "connection_type": conn_type,
-            "connection_guid": connection_guid
+            "connection_type": type,
+            "connection_guid": guid
         }
 
-        if conn_type == "filemanager":
+        if type == "filemanager":
             conn["connection_path"] = param
-        elif conn_type == "mssql":
+        elif type == "mssql":
             conn["connection_string"] = param
-        elif conn_type == "sqlite":
+        elif type == "sqlite":
             conn["connection_database_name"] = param
 
         self.config['connections'].append(conn)
