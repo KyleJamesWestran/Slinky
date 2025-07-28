@@ -2,3 +2,4 @@
 .env
 agent/local.db
 backend_slinky/config.json
+config.json

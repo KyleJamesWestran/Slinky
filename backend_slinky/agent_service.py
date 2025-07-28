@@ -5,6 +5,8 @@ import json
 import pyodbc
 import sqlite3  # Optional, if you still want SQLite support
 from agent_config_manager import load_config
+import ssl
+
 
 CONFIG_FILE = "config.json"
 
@@ -12,7 +14,7 @@ config = load_config()
 AGENT_ID = config["client_guid"]
 SERVER = config["client_server"]
 SERVER_URL = f"{SERVER}/ws/{AGENT_ID}"
-ssl_context = None  # Add SSL context if needed
+ssl_context = ssl.create_default_context()
 
 def get_connection_info(guid):
     for conn in config["connections"]:
